@@ -33,7 +33,6 @@ CREATE TABLE shoppinglist(
     PRIMARY KEY(cID, pID)
 );
 
--- CREATE TABLE purchase(
 CREATE TABLE transaction(
     tID DECIMAL(5,0),
     cID DECIMAL(5,0) NOT NULL,

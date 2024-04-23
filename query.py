@@ -18,7 +18,10 @@ def make_prompt(query, tables):
 if __name__ == '__main__':
     argument_parser.add_argument('id', help='Query id')
 
-    query = make_prompt(queries[argument_parser.args.id], tables)
+    query = queries[argument_parser.args.id]
+    prompt = make_prompt(query, tables)
+
+    print(query)
     
-    pyperclip.copy(query)
-    messages.success('Message copied to clipboard')
+    pyperclip.copy(prompt)
+    messages.info('Prompt copied to clipboard')
