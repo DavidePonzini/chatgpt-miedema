@@ -26,8 +26,8 @@ CREATE TABLE product(
 );
 
 CREATE TABLE shoppinglist(
-    cID DECIMAL(5,0),
-    pID DECIMAL(5,0),
+    cID DECIMAL(5,0) REFERENCES customer(cID),
+    pID DECIMAL(5,0) REFERENCES product(pID),
     quantity DECIMAL(10,0) NOT NULL,
     date DATE NOT NULL,
     PRIMARY KEY(cID, pID)
@@ -35,9 +35,9 @@ CREATE TABLE shoppinglist(
 
 CREATE TABLE transaction(
     tID DECIMAL(5,0),
-    cID DECIMAL(5,0) NOT NULL,
-    sID DECIMAL(5,0) NOT NULL,
-    pID DECIMAL(5,0),
+    cID DECIMAL(5,0) NOT NULL REFERENCES customer(cID),
+    sID DECIMAL(5,0) NOT NULL REFERENCES store(sID),
+    pID DECIMAL(5,0) REFERENCES product(pID),
     date DATE NOT NULL,
     quantity DECIMAL(10,0) NOT NULL,
     price DECIMAL(10,2) NOT NULL,
@@ -45,8 +45,8 @@ CREATE TABLE transaction(
 );
 
 CREATE TABLE inventory(
-    sID DECIMAL(5,0),
-    pID DECIMAL(5,0),
+    sID DECIMAL(5,0) REFERENCES store(sID),
+    pID DECIMAL(5,0) REFERENCES product(pID),
     date DATE NOT NULL,
     quantity DECIMAL(10) NOT NULL,
     unit_price DECIMAL(10, 2) NOT NULL,
@@ -66,6 +66,14 @@ INSERT INTO store VALUES
 (3, 'Hoogvliet', 'Rozemarijnstraat', 'Breda'),
 (4, 'Sligro', 'Stationsplein', 'Breda');
 
+
+INSERT INTO product VALUES
+(1, 'Milk', '""'),
+(2, 'Mushrooms', '""'),
+(3, 'Apples', '""'),
+(4, 'Tea', '""'),
+(5, 'Banana', '""');
+
 INSERT INTO transaction VALUES
 (0, 0, 4, 3, '2020-05-12', 5, .4),
 (1, 0, 4, 1, '2020-05-13', 2, .65),
@@ -82,13 +90,6 @@ INSERT INTO inventory VALUES
 (0, 2, '2020-05-15', 32, 2.3),
 (1, 4, '2020-05-15', 12, 1.8),
 (1, 1, '2020-05-15', 46, .6);
-
-INSERT INTO product VALUES
-(1, 'Milk', '""'),
-(2, 'Mushrooms', '""'),
-(3, 'Apples', '""'),
-(4, 'Tea', '""'),
-(5, 'Banana', '""');
 
 
 
